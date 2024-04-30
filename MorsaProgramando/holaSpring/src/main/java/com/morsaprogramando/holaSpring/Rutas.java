@@ -31,6 +31,6 @@ public class Rutas {
     //-->
     @GetMapping("/libro2/{id}")
     String leerLibro2(@PathVariable int id, @RequestParam String params, @RequestParam String editorial){
-        return "Leyendo el libro2 id: " + id + ", params: " + params + ", La editorial es: " + editorial;
+        return "Leyendo el libro2 con id: " + id + ", params: " + params + ", La editorial es: " + editorial;
     }
 }
