@@ -1,12 +1,15 @@
 package com.morsaprogramando.holaSpring;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 public class Rutas {
+
+    private Logger logger = LoggerFactory.getLogger(Rutas.class);
 
     @GetMapping("/saludo")
     String miPrimeraRuta(){
@@ -28,9 +31,22 @@ public class Rutas {
 
 
     //------------------ QueryParams: ---------------
-    //-->
+    //Permite colocar en la petición por Postman varios parámetros a pesar de que no se usen
+    //pero si es indispensable que lleven los establecidos como @RequestParam
     @GetMapping("/libro2/{id}")
     String leerLibro2(@PathVariable int id, @RequestParam String params, @RequestParam String editorial){
         return "Leyendo el libro2 con id: " + id + ", params: " + params + ", La editorial es: " + editorial;
+    }
+
+    //------------------ BodyParams: ---------------
+    //Aquí nos permite usar el método PostRequest
+    //En los PostRequest normalmente no se envía la información en la URL, ni cómo QueryParams ni como PathParams
+    //La información entonces se envía en el Body, generalmente llevanun JSON
+    @PostMapping("/guadarLibro")
+    String guardarLibro(@RequestBody Map<String, Object> libro){
+        libro.keySet().forEach(llave -> {
+            logger.debug("llave {} valor{} ", llave, libro.get(llave));
+        });
+        return "libro guardado";
     }
 }
