@@ -1,5 +1,6 @@
 package com.morsaprogramando.holaSpring;
 
+import com.morsaprogramando.holaSpring.models.Libro;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class Rutas {
         return "Hola mundo desde Spring Controller :)";
     }
 
-    //------------------ PathParams: ---------------
+    //============================================= PathParams: =============================================
     //-->Filtrando por ID del libro
     @GetMapping("/libro/{id}")
     String leerLibro(@PathVariable int id){
@@ -30,7 +31,7 @@ public class Rutas {
     }
 
 
-    //------------------ QueryParams: ---------------
+    //============================================= QueryParams: =============================================
     //Permite colocar en la petición por Postman varios parámetros a pesar de que no se usen
     //pero si es indispensable que lleven los establecidos como @RequestParam
     @GetMapping("/libro2/{id}")
@@ -38,15 +39,24 @@ public class Rutas {
         return "Leyendo el libro2 con id: " + id + ", params: " + params + ", La editorial es: " + editorial;
     }
 
-    //------------------ BodyParams: ---------------
+    //============================================= BodyParams: =============================================
     //Aquí nos permite usar el método PostRequest
     //En los PostRequest normalmente no se envía la información en la URL, ni cómo QueryParams ni como PathParams
-    //La información entonces se envía en el Body, generalmente llevanun JSON
+    //La información entonces se envía en el Body, generalmente llevan un JSON
+
+    //-->Ejemplo usando un tipo genérico sobre un JSON
     @PostMapping("/guadarLibro")
     String guardarLibro(@RequestBody Map<String, Object> libro){
         libro.keySet().forEach(llave -> {
             logger.debug("llave {} valor{} ", llave, libro.get(llave));
         });
+        return "libro guardado";
+    }
+
+    //-->Ejemplo: Ahora exigiendo que eso sea un libro
+    @PostMapping("/guadarLibro2")
+    String guardarLibro2(@RequestBody Libro libro){
+        logger.debug("llave {} valor {}", libro.nombre, libro.editorial);
         return "libro guardado";
     }
 }
