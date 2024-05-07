@@ -3,6 +3,7 @@ package com.morsaprogramando.holaSpring;
 import com.morsaprogramando.holaSpring.models.Libro;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -58,5 +59,18 @@ public class Rutas {
     String guardarLibro2(@RequestBody Libro libro){
         logger.debug("llave {} valor {}", libro.nombre, libro.editorial);
         return "libro guardado";
+    }
+
+    //============================================= Http Status: =============================================
+    @GetMapping("/saludar01")
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    String miSegundaRutaConStatus01(){
+        return "Aprendiendo statuses http en spring Boot";
+    }
+
+    @GetMapping("/saludar02")
+    @ResponseStatus(value = HttpStatus.MOVED_PERMANENTLY, reason = "Fue movida a la versión 2 de la API")
+    String miSegundaRutaConStatus02(){
+        return "Aprendiendo statuses http en spring Boot";
     }
 }
