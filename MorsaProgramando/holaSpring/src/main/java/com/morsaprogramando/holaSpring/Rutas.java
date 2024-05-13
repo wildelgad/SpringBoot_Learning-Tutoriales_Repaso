@@ -73,4 +73,6 @@ public class Rutas {
     String miSegundaRutaConStatus02(){
         return "Aprendiendo statuses http en spring Boot";
     }
+
+    //prueba--
 }
