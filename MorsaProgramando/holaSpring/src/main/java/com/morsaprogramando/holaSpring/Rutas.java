@@ -1,9 +1,11 @@
 package com.morsaprogramando.holaSpring;
 
 import com.morsaprogramando.holaSpring.models.Libro;
+import org.apache.catalina.connector.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -74,5 +76,10 @@ public class Rutas {
         return "Aprendiendo statuses http en spring Boot";
     }
 
-    //prueba--
+    @GetMapping("/animales/{lugar}")
+    public ResponseEntity<String> getAnimales(@PathVariable String lugar){
+        if(lugar.equals("granja")){
+            return "Caballo, vaca, oveja, gallina";
+        }
+    }
 }
