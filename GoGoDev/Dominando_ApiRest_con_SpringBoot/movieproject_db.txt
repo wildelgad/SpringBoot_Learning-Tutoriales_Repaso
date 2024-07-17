@@ -1,0 +1,16 @@
+CREATE SCHEMA IF NOT EXISTS `movieproject` DEFAULT CHARACTER SET utf8 ;
+USE `movieproject` ;
+
+-- -----------------------------------------------------
+-- Table `movieproject`.`movies`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `movieproject`.`movies` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(45) NULL,
+  `description` VARCHAR(45) NULL,
+  `year` INT NULL,
+  `votes` INT NULL,
+  `rating` DOUBLE NULL,
+  `image_url` VARCHAR(100) NULL,
+  `moviescol` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
