@@ -17,7 +17,6 @@ public class MovieController {
     private MovieRepository movieRepository;
 
     //----  Listar todas las peliculas
-    @CrossOrigin
     @GetMapping
     public List<Movie> getAllMovies(){
         return movieRepository.findAll();
